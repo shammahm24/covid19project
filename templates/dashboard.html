@@ -1,0 +1,86 @@
+{%extends 'base.html'%}
+{%block page%}
+<h1>Covid-19 Dashboard</h1>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <img src="static/confirmed.png" alt="confirmed graph" width="400" height="300"/></br>
+            <img src="static/recovered.png" alt="recovered graph" width="400" height="300"/></br>
+            <img src="static/deaths.png" alt="deaths graph" width="400" height="300"/></br>
+
+        </div>
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-dark">
+            <h1>Run Queries</h1>
+            <form action="/" method="POST">
+                <select class="custom-select custom-select-lg mb-3 text-dark" data-style="btn-new" style="color:black;" name="queries">
+                    <option selected>Choose Query to Run</option>
+                    {%for o in options%}
+                    <option value="{{ o[0]}}" SELECTED>{{ o[0] }}</option>
+                    {%endfor%}
+
+                </select>
+                <button class="btn btn-primary" type="submit">Run</button>
+            </form>
+
+            <div class="pre-scrollable">
+                <table class="table table-responsive-sm table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Country</th>
+                            <th scope="col">Confirmed</th>
+                            <th scope="col">Deaths</th>
+                            <th scope="col">Recovered</th>
+                        </tr>
+                    </thead>
+                    {%for q in queryData%}
+                    <tr>
+                        <td>{{q[0]}}</td>
+                        <td>{{q[1]}}</td>
+                        <td>{{q[2]}}</td>
+                        <td>{{q[3]}}</td>
+
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+            <div class="pre-scrollable">
+                <table class="table table-responsive-sm table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Country</th>
+                            <th scope="col">Confirmed</th>
+                            <th scope="col">Deaths</th>
+                            <th scope="col">Recovered</th>
+                        </tr>
+                    </thead>
+
+                    {%for d in data%}
+                    <tr>
+                        <td>{{d[0]}}</td>
+                        <td>{{d[1]}}</td>
+                        <td>{{d[2]}}</td>
+                        <td>{{d[3]}}</td>
+
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{%endblock%}
